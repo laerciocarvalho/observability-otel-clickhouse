@@ -195,16 +195,6 @@ SELECT count() FROM otel.otel_traces;
 
 ---
 
-## Decisões técnicas (para entrevista / documentação interna)
-
-- **OTLP como contrato**: qualquer linguagem/runtime com SDK OTEL funciona
-- **Collector no meio**: batch, retry, memory limiter e desacoplamento app ↔ storage
-- **ClickHouse com TTL (7 dias)**: controla storage no free tier; ajuste conforme retenção do negócio
-- **Schema com codecs + bloom filters + ORDER BY (ServiceName, SpanName, Timestamp)**: otimizado para as queries mais comuns de observabilidade
-- **Spans manuais + automáticos**: mostra o caminho completo de instrumentação
-
----
-
 ## Próximos passos possíveis
 
 - Grafana + data source ClickHouse (dashboards)
