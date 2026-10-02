@@ -12,10 +12,10 @@ A ideia é simples: qualquer aplicação instrumentada com OpenTelemetry pode en
 
 ## Para quem é
 
-- Times que querem sair de APM caros (Datadog, New Relic, etc.) ou reduzir a conta
-- Empresas que já usam (ou querem usar) ClickHouse e precisam de um caminho claro para observabilidade
-- Engenheiros que precisam de um exemplo concreto e funcionando de OTEL → Collector → ClickHouse
-- Quem busca uma base reutilizável para instrumentar APIs .NET (e, por extensão, outros runtimes)
+- Times que querem sair de APM caros (Datadog, New Relic) ou reduzir a conta
+- Empresas que já usam ou querem usar ClickHouse e precisam de um caminho claro para observabilidade
+- Quem precisa de um exemplo concreto e funcionando de OpenTelemetry Collector + ClickHouse
+- Quem busca uma base reutilizável para instrumentar APIs .NET 
 
 ---
 
@@ -40,7 +40,7 @@ A aplicação de pedidos (`/api/orders`) é só o **exemplo de instrumentação*
 │  Sua aplicação               │
 │  (qualquer linguagem com     │
 │   OpenTelemetry SDK)         │
-│  Exemplo incluso: .NET 10    │
+│  No caso aqui: .NET 10       │
 └──────────────┬───────────────┘
                │ OTLP (gRPC :4317 / HTTP :4318)
                ▼
@@ -96,11 +96,11 @@ Qualquer app com OpenTelemetry SDK basta apontar o exporter OTLP para o Collecto
 OTEL_EXPORTER_OTLP_ENDPOINT=http://localhost:4317
 ```
 
-No exemplo deste repo (ASP.NET Core), a instrumentação já está pronta em `Program.cs` (ASP.NET Core + HttpClient + Runtime + spans manuais).
+No exemplo deste repo, ASP.NET Core, a instrumentação já está pronta em `Program.cs` (ASP.NET Core + HttpClient + Runtime + spans manuais).
 
 ### 3. Consulte os dados
 
-Use as queries em `clickhouse/queries.sql`:
+Use as queries que estão em `clickhouse/queries.sql`:
 
 - Latência p50 / p95 / p99 por endpoint
 - Taxa de erro
@@ -140,7 +140,7 @@ Não é o produto final — é o **exemplo de como instrumentar**. Troque pelos 
 
 ### 1. Credenciais ClickHouse Cloud
 
-No console → seu serviço → **Connect** → aba **Username and password** (protocolo **Native**):
+No console, clique no nome do seu serviço, depois **Connect**, aba **Username and password** (protocolo **Native**):
 
 ```yaml
 # docker-compose.yml
@@ -213,4 +213,4 @@ Este repositório não é “mais um demo de traces”. É uma **base reutilizá
 2. Instrumenta os serviços com OTEL (exemplo .NET incluso)  
 3. Analisa tudo com SQL no ClickHouse  
 
-Use como referência, adapte ao seu domínio e evolua conforme a necessidade do negócio.
+Use como referência, adapte ao seu domínio e evolua conforme a necessidade do seu negócio.
