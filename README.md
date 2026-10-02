@@ -181,6 +181,12 @@ SELECT count() FROM otel.otel_traces;
 
 ---
 
+## Evidências no ClickHouse
+<img width="1588" height="766" alt="image" src="https://github.com/user-attachments/assets/c27f9e0d-62b3-4a30-9a14-362eb6070317" />
+<img width="1587" height="687" alt="image" src="https://github.com/user-attachments/assets/5b8abfaf-fb40-4383-9a67-99de2df340ef" />
+
+
+
 ## Estrutura do repositório
 
 ```
