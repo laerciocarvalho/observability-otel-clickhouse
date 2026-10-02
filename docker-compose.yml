@@ -1,0 +1,40 @@
+services:
+  # OpenTelemetry Collector (contrib distribution with ClickHouse exporter)
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.128.0
+    container_name: otel-collector
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    volumes:
+      - ./otel-collector/config.yaml:/etc/otelcol-contrib/config.yaml:ro
+    ports:
+      - "4317:4317"   # OTLP gRPC
+      - "4318:4318"   # OTLP HTTP
+    environment:
+      # === REPLACE THESE WITH YOUR CLICKHOUSE CLOUD CREDENTIALS ===
+      CLICKHOUSE_ENDPOINT: "clickhouse://YOUR_HOST.clickhouse.cloud:9440?secure=true"
+      CLICKHOUSE_DATABASE: "otel"
+      CLICKHOUSE_USERNAME: "default"
+      CLICKHOUSE_PASSWORD: "YOUR_PASSWORD"
+    restart: unless-stopped
+
+  # Optional: local ClickHouse for development (comment out if using only Cloud)
+  # clickhouse:
+  #   image: clickhouse/clickhouse-server:25.8
+  #   container_name: clickhouse
+  #   ports:
+  #     - "8123:8123"
+  #     - "9000:9000"
+  #   volumes:
+  #     - clickhouse_data:/var/lib/clickhouse
+  #   ulimits:
+  #     nofile:
+  #       soft: 262144
+  #       hard: 262144
+  #   environment:
+  #     CLICKHOUSE_DB: otel
+  #     CLICKHOUSE_USER: default
+  #     CLICKHOUSE_PASSWORD: ""
+  #   restart: unless-stopped
+
+# volumes:
+#   clickhouse_data:
